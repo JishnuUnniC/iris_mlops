@@ -34,3 +34,48 @@ Bad data:
 ```bash
 python src/ingest_batch.py data/incoming/iris_batch_bad.csv
 ```
+
+# DVC
+
+Industry-style behavior:
+
+new approved data
+    -> promoted to data/raw/iris.csv
+    -> DVC detects changed dependency
+    -> dvc repro reruns only invalidated stages
+    -> preprocessing reruns
+    -> training reruns
+    -> model is regenerated
+
+Local trigger:
+```bash
+pip install dvc
+dvc init
+
+git add .dvc .dvcignore
+git commit -m "Initialize DVC"
+
+# test preprocess.py and train.py
+# DVC and Git should not track the same file
+# so, output files moed out of git tracking
+
+git rm --cached data/processed/train.csv
+git rm --cached data/processed/test.csv
+git rm --cached models/iris_random_forest.joblib
+
+# prepare yaml script
+
+dvc stage add -n preprocess -d data/raw/iris.csv -d src/preprocess.py -d src/config.py -o data/processed/train.csv -o data/processed/test.csv "python src/preprocess.py"
+
+dvc stage add -n train -d data/processed/train.csv -d data/processed/test.csv -d src/train.py -d src/config.py -o models/iris_random_forest.joblib "python src/train.py"
+
+# verify DVC creation
+# test DVC yaml 
+
+dvc repro
+
+# run 'dvc repro' again to see no change = no execution
+
+
+python src/ingest_batch.py data/incoming/iris_v2.csv
+```
