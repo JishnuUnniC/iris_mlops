@@ -22,9 +22,13 @@ def main(batch_path):
     shutil.copy2(batch, RAW_DATA)
     print("BATCH APPROVED AND PROMOTED:", RAW_DATA)
 
-    # Industry pattern: ingestion success triggers downstream pipeline automatically.
-    subprocess.run([sys.executable, "src/preprocess.py"], check=True)
-    subprocess.run([sys.executable, "src/train.py"], check=True)
+    # # Industry pattern: ingestion success triggers downstream pipeline automatically.
+    # subprocess.run([sys.executable, "src/preprocess.py"], check=True)
+    # subprocess.run([sys.executable, "src/train.py"], check=True)
+
+    # upgraded pipeline execution using dvc.yaml
+    subprocess.run(["dvc", "repro"], check=True)
+    print("Pipeline reproduction complete")
 
 if __name__ == "__main__":
     main(sys.argv[1])
