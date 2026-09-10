@@ -17,7 +17,7 @@ def main():
     n_estimators = 50
     max_depth = 4
 
-    mlflow.set_experiment('iris-classification')
+    mlflow.set_experiment('iris-model1')
 
     with mlflow.start_run():
 

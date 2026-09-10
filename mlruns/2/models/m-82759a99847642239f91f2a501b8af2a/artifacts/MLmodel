@@ -1,4 +1,4 @@
-artifact_path: file:///D:/TKM/Iris_mlops/mlruns/1/models/m-3f6bbbb646404b4cac194d946dff8b54/artifacts
+artifact_path: file:///D:/TKM/Iris_mlops/mlruns/2/models/m-82759a99847642239f91f2a501b8af2a/artifacts
 flavors:
   python_function:
     env:
@@ -14,10 +14,10 @@ flavors:
     serialization_format: skops
     sklearn_version: 1.9.0
     skops_trusted_types: null
-mlflow_version: 3.16.0
-model_id: m-3f6bbbb646404b4cac194d946dff8b54
+mlflow_version: 3.14.0
+model_id: m-82759a99847642239f91f2a501b8af2a
 model_size_bytes: 891812
-model_uuid: m-3f6bbbb646404b4cac194d946dff8b54
+model_uuid: m-82759a99847642239f91f2a501b8af2a
 prompts: null
-run_id: 36fe3e047ef74732b0afc8928d8c1add
-utc_time_created: '2026-09-10 14:41:47.324631'
+run_id: 8bcc32d9ed41478286fb298b6fb54e8a
+utc_time_created: '2026-09-10 15:12:56.526195'
